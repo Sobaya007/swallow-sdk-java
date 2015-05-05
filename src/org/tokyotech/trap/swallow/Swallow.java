@@ -11,8 +11,8 @@ public interface Swallow {
 	/*
 	 * ユーザを探す
 	 */
-	public User[] findUser(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, String userNamePattern,
+	public User[] findUser(Integer startIndex, Integer endIndex, Long fromTime,
+			Long toTime, Integer[] userIDs, String userNamePattern,
 			String profilePattern, Boolean hasImage);
 
 	/*
@@ -27,10 +27,10 @@ public interface Swallow {
 	 * 投稿を取得
 	 */
 	public Message[] findMessage(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] postedUserIDs,
-			Integer[] tagIDs, Integer[] replyPostIDs, Integer[] destUserIDs,
-			String messagePattern, Boolean hasAttachment, Boolean isEnquete,
-			Boolean convertToKana);
+			Long fromTime, Long toTime, Integer[] postIDs,
+			Integer[] postedUserIDs, Integer[] tagIDs, Integer[] replyPostIDs,
+			Integer[] destUserIDs, String messagePattern,
+			Boolean hasAttachment, Boolean isEnquete, Boolean convertToKana);
 
 	/*
 	 * 投稿する
@@ -42,8 +42,8 @@ public interface Swallow {
 	/*
 	 * ファイルを探す
 	 */
-	public File[] findFile(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] tagIDs,
+	public File[] findFile(Integer startIndex, Integer endIndex, Long fromTime,
+			Long toTime, Integer[] fileIDs, Integer[] tagIDs,
 			String fileNamePattern, String fileTypePattern);
 
 	/*
@@ -62,8 +62,8 @@ public interface Swallow {
 	 * タグを探す
 	 */
 	public Tag[] findTag(Integer startIndex, Integer endIndex, Long fromTime,
-			Long toTime, Integer minPostNum, Integer maxPostNum,
-			String tagNamePattern);
+			Long toTime, Integer[] tagIDs, Integer minPostNum,
+			Integer maxPostNum, String tagNamePattern);
 
 	/*
 	 * タグを作成

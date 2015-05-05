@@ -106,7 +106,7 @@ public class SwallowTest implements Swallow {
 	
 	@Override
 	public User[] findUser(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, String userNamePattern,
+			Long fromTime, Long toTime, Integer[] userIDs, String userNamePattern,
 			String profilePattern, Boolean hasImage) {
 		return dummyUser.toArray(new User[0]);
 	}
@@ -132,7 +132,7 @@ public class SwallowTest implements Swallow {
 	}
 	@Override
 	public Message[] findMessage(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] postedUserIDs,
+			Long fromTime, Long toTime, Integer[] postIDs, Integer[] postedUserIDs,
 			Integer[] tagIDs, Integer[] replyPostIDs,
 			Integer[] destUserIDs, String messagePattern,
 			Boolean hasAttachment, Boolean isEnquete, Boolean convertToKana) {
@@ -149,7 +149,7 @@ public class SwallowTest implements Swallow {
 	}
 	@Override
 	public File[] findFile(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] tagIDs,
+			Long fromTime, Long toTime, Integer[] fileIDs, Integer[] tagIDs,
 			String fileNamePattern, String fileTypePattern) {
 		return dummyFile.toArray(new Swallow.File[0]);
 	}
@@ -168,7 +168,7 @@ public class SwallowTest implements Swallow {
 	}
 	@Override
 	public Tag[] findTag(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer minPostNum,
+			Long fromTime, Long toTime, Integer[] tagIDs, Integer minPostNum,
 			Integer maxPostNum, String tagNamePattern) {
 		return dummyTag.toArray(new Swallow.Tag[0]);
 	}

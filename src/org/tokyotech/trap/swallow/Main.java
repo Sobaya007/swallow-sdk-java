@@ -36,7 +36,7 @@ public class Main {
 		 * ユーザ情報編集と一覧取得
 		 */
 		swallow.modifyUser("watashi", null, null, null, null, null, null, null, null, null, null);
-		for(Swallow.User u : swallow.findUser(0, 50, null, null, null, null, null)){
+		for(Swallow.User u : swallow.findUser(0, 50, null, null, null, null, null, null)){
 			System.out.println(u.getUserName());
 		}
 		
@@ -46,7 +46,7 @@ public class Main {
 		 * 投稿と一覧取得
 		 */
 		swallow.createMessage("てすと", null, null, null, null, null, null, null);
-		for(Swallow.Message m : swallow.findMessage(0, 50, null, null, null, null, null, null, null, null, null, false)){
+		for(Swallow.Message m : swallow.findMessage(0, 50, null, null, null, null, null, null, null, null, null, null, false)){
 			System.out.println(m.getMessage());
 		}
 		
@@ -56,7 +56,7 @@ public class Main {
 		 * ファイル投稿と一覧取得
 		 */
 		swallow.createFile("test.txt", "text/plain", null, null, null, new ByteArrayInputStream("abcde".getBytes()));
-		for(Swallow.File f : swallow.findFile(0, 50, null, null, null, null, null)){
+		for(Swallow.File f : swallow.findFile(0, 50, null, null, null, null, null, null)){
 			System.out.println(f.getFileName());
 		}
 		
@@ -66,7 +66,7 @@ public class Main {
 		 * タグ追加と一覧取得
 		 */
 		swallow.createTag("myTag");
-		for(Swallow.Tag t : swallow.findTag(0, 50, null, null, null, null, null)){
+		for(Swallow.Tag t : swallow.findTag(0, 50, null, null, null, null, null, null)){
 			System.out.println(t.getTagName());
 		}
 		

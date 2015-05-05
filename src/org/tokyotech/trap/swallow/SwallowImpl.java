@@ -14,8 +14,8 @@ public class SwallowImpl implements Swallow {
 
 	@Override
 	public User[] findUser(Integer startIndex, Integer endIndex, Long fromTime,
-			Long toTime, String userNamePattern, String profilePattern,
-			Boolean hasImage) {
+			Long toTime, Integer[] userIDs, String userNamePattern,
+			String profilePattern, Boolean hasImage) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
@@ -31,10 +31,10 @@ public class SwallowImpl implements Swallow {
 
 	@Override
 	public Message[] findMessage(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] postedUserIDs,
-			Integer[] tagIDs, Integer[] replyPostIDs, Integer[] destUserIDs,
-			String messagePattern, Boolean hasAttachment, Boolean isEnquete,
-			Boolean convertToKana) {
+			Long fromTime, Long toTime, Integer[] postIDs,
+			Integer[] postedUserIDs, Integer[] tagIDs, Integer[] replyPostIDs,
+			Integer[] destUserIDs, String messagePattern,
+			Boolean hasAttachment, Boolean isEnquete, Boolean convertToKana) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
@@ -49,8 +49,8 @@ public class SwallowImpl implements Swallow {
 
 	@Override
 	public File[] findFile(Integer startIndex, Integer endIndex, Long fromTime,
-			Long toTime, Integer[] tagIDs, String fileNamePattern,
-			String fileTypePattern) {
+			Long toTime, Integer[] fileIDs, Integer[] tagIDs,
+			String fileNamePattern, String fileTypePattern) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
@@ -71,8 +71,8 @@ public class SwallowImpl implements Swallow {
 
 	@Override
 	public Tag[] findTag(Integer startIndex, Integer endIndex, Long fromTime,
-			Long toTime, Integer minPostNum, Integer maxPostNum,
-			String tagNamePattern) {
+			Long toTime, Integer[] tagIDs, Integer minPostNum,
+			Integer maxPostNum, String tagNamePattern) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
