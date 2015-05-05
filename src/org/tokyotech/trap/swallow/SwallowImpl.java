@@ -1,4 +1,4 @@
-package trap.swallow;
+package org.tokyotech.trap.swallow;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -13,24 +13,25 @@ public class SwallowImpl implements Swallow {
 	}
 
 	@Override
-	public User[] findUser(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, String userNamePattern,
-			String profilePattern, Boolean hasImage) {
+	public User[] findUser(Integer startIndex, Integer endIndex, Long fromTime,
+			Long toTime, String userNamePattern, String profilePattern,
+			Boolean hasImage) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
-	public User modifyUser(String password, String userName, String profile,
-			Integer imageFileID, String email, String twitter, String gcm,
-			String apns, Integer[] observeTagIDs, Boolean observeMention) {
+	public User modifyUser(String userName, String profile,
+			Integer imageFileID, String password, String email, String web,
+			String twitter, String gcm, String apns, Integer[] observeTagIDs,
+			Boolean observeMention) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
 	public Message[] findMessage(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer[] postedUserIDs,
+			Long fromTime, Long toTime, Integer[] postedUserIDs,
 			Integer[] tagIDs, Integer[] replyPostIDs, Integer[] destUserIDs,
 			String messagePattern, Boolean hasAttachment, Boolean isEnquete,
 			Boolean convertToKana) {
@@ -47,9 +48,9 @@ public class SwallowImpl implements Swallow {
 	}
 
 	@Override
-	public File[] findFile(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer[] tagIDs,
-			String fileNamePattern, String fileTypePattern) {
+	public File[] findFile(Integer startIndex, Integer endIndex, Long fromTime,
+			Long toTime, Integer[] tagIDs, String fileNamePattern,
+			String fileTypePattern) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
@@ -69,8 +70,8 @@ public class SwallowImpl implements Swallow {
 	}
 
 	@Override
-	public Tag[] findTag(Integer startIndex, Integer endIndex, Date startDate,
-			Date endDate, Integer minPostNum, Integer maxPostNum,
+	public Tag[] findTag(Integer startIndex, Integer endIndex, Long fromTime,
+			Long toTime, Integer minPostNum, Integer maxPostNum,
 			String tagNamePattern) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
@@ -84,7 +85,7 @@ public class SwallowImpl implements Swallow {
 
 	@Override
 	public Favorite[] findFavorite(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer minFavNum, Integer maxFavNum,
+			Long fromTime, Long toTime, Integer minFavNum, Integer maxFavNum,
 			Integer[] userIDs, Integer[] postIDs) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
@@ -98,7 +99,7 @@ public class SwallowImpl implements Swallow {
 
 	@Override
 	public Answer[] findAnswer(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer[] userIDs, Integer[] postIDs) {
+			Long fromTime, Long toTime, Integer[] userIDs, Integer[] postIDs) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
@@ -111,7 +112,7 @@ public class SwallowImpl implements Swallow {
 
 	@Override
 	public Received[] findReceived(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer[] userIDs, Integer[] postIDs) {
+			Long fromTime, Long toTime, Integer[] userIDs, Integer[] postIDs) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

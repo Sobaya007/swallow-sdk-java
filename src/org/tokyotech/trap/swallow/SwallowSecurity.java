@@ -1,9 +1,9 @@
-package trap.swallow;
+package org.tokyotech.trap.swallow;
 
 import java.io.Serializable;
 import java.security.SecureRandom;
 
-import javax.xml.bind.DatatypeConverter;
+import android.util.Base64;
 
 /*
  * ログイン関係
@@ -46,7 +46,7 @@ public class SwallowSecurity implements Serializable {
 	 */
 	public Swallow getSwallow(){
 		// FIXME: テスト用
-		return new SwallowTest();
+		return new SwallowTest(sessionID, this);
 		// return new SwallowImpl(sessionID, this);
 	}
 
@@ -54,13 +54,13 @@ public class SwallowSecurity implements Serializable {
 	 * バイト列をBase64文字列化
 	 */
 	private String base64Enc(byte[] input) {
-		return DatatypeConverter.printBase64Binary(input);
+		return Base64.encodeToString(input, Base64.DEFAULT);
 	}
 	/*
 	 * Base64文字列をバイト列化
 	 */
 	private byte[] base64Dec(String input) {
-		return DatatypeConverter.parseBase64Binary(input);
+		return Base64.decode(input, Base64.DEFAULT);
 	}
 	/*
 	 * RSA公開鍵で文字列を暗号化

@@ -1,4 +1,4 @@
-package trap.swallow;
+package org.tokyotech.trap.swallow;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,7 +35,7 @@ public class Main {
 		/*
 		 * ユーザ情報編集と一覧取得
 		 */
-		swallow.modifyUser(null, "ぼく", null, null, null, null, null, null, null, null);
+		swallow.modifyUser("watashi", null, null, null, null, null, null, null, null, null, null);
 		for(Swallow.User u : swallow.findUser(0, 50, null, null, null, null, null)){
 			System.out.println(u.getUserName());
 		}

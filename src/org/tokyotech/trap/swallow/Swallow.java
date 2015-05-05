@@ -1,7 +1,6 @@
-package trap.swallow;
+package org.tokyotech.trap.swallow;
 
 import java.io.InputStream;
-import java.util.Date;
 
 /*
  * リクエストメソッドの引数や、レスポンスクラスのフィールドはすべてAPIアクションのparametersおよびresultsに対応しています。
@@ -13,21 +12,22 @@ public interface Swallow {
 	 * ユーザを探す
 	 */
 	public User[] findUser(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, String userNamePattern,
+			Long fromTime, Long toTime, String userNamePattern,
 			String profilePattern, Boolean hasImage);
 
 	/*
 	 * ユーザ情報を編集
 	 */
-	public User modifyUser(String password, String userName, String profile,
-			Integer imageFileID, String email, String twitter, String gcm,
-			String apns, Integer[] observeTagIDs, Boolean observeMention);
+	public User modifyUser(String userName, String profile,
+			Integer imageFileID, String password, String email, String web,
+			String twitter, String gcm, String apns, Integer[] observeTagIDs,
+			Boolean observeMention);
 
 	/*
 	 * 投稿を取得
 	 */
 	public Message[] findMessage(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer[] postedUserIDs,
+			Long fromTime, Long toTime, Integer[] postedUserIDs,
 			Integer[] tagIDs, Integer[] replyPostIDs, Integer[] destUserIDs,
 			String messagePattern, Boolean hasAttachment, Boolean isEnquete,
 			Boolean convertToKana);
@@ -43,7 +43,7 @@ public interface Swallow {
 	 * ファイルを探す
 	 */
 	public File[] findFile(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer[] tagIDs,
+			Long fromTime, Long toTime, Integer[] tagIDs,
 			String fileNamePattern, String fileTypePattern);
 
 	/*
@@ -61,8 +61,8 @@ public interface Swallow {
 	/*
 	 * タグを探す
 	 */
-	public Tag[] findTag(Integer startIndex, Integer endIndex, Date startDate,
-			Date endDate, Integer minPostNum, Integer maxPostNum,
+	public Tag[] findTag(Integer startIndex, Integer endIndex, Long fromTime,
+			Long toTime, Integer minPostNum, Integer maxPostNum,
 			String tagNamePattern);
 
 	/*
@@ -74,7 +74,7 @@ public interface Swallow {
 	 * Favを探す
 	 */
 	public Favorite[] findFavorite(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer minFavNum, Integer maxFavNum,
+			Long fromTime, Long toTime, Integer minFavNum, Integer maxFavNum,
 			Integer[] userIDs, Integer[] postIDs);
 
 	/*
@@ -86,7 +86,7 @@ public interface Swallow {
 	 * アンケート回答を探す
 	 */
 	public Answer[] findAnswer(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer[] userIDs, Integer[] postIDs);
+			Long fromTime, Long toTime, Integer[] userIDs, Integer[] postIDs);
 
 	/*
 	 * アンケートに回答する
@@ -97,7 +97,7 @@ public interface Swallow {
 	 * 既読情報確認
 	 */
 	public Received[] findReceived(Integer startIndex, Integer endIndex,
-			Date startDate, Date endDate, Integer[] userIDs, Integer[] postIDs);
+			Long fromTime, Long toTime, Integer[] userIDs, Integer[] postIDs);
 
 	/*
 	 * 既読をつける
@@ -109,15 +109,15 @@ public interface Swallow {
 	 */
 	class User {
 		private Integer UserID;
-		private Integer LastLogin;
+		private Long Joined;
 		private String UserName;
 		private String Profile;
 		private Integer Image;
 
-		public User(Integer userID, Integer lastLogin, String userName,
+		public User(Integer userID, Long joined, String userName,
 				String profile, Integer image) {
 			UserID = userID;
-			LastLogin = lastLogin;
+			Joined = joined;
 			UserName = userName;
 			Profile = profile;
 			Image = image;
@@ -127,8 +127,8 @@ public interface Swallow {
 			return UserID;
 		}
 
-		public Integer getLastLogin() {
-			return LastLogin;
+		public Long getJoined() {
+			return Joined;
 		}
 
 		public String getUserName() {
@@ -148,6 +148,7 @@ public interface Swallow {
 	 * レスポンス: ユーザ詳細情報
 	 */
 	class UserDetail extends User {
+		private String Email;
 		private String Web;
 		private String Twitter;
 		private String GCM;
@@ -155,17 +156,22 @@ public interface Swallow {
 		private Integer[] ObserveTag;
 		private Boolean ObserveMention;
 
-		public UserDetail(Integer userID, Integer lastLogin, String userName,
-				String profile, Integer image, String web, String twitter,
-				String gCM, String aPNs, Integer[] observeTag,
+		public UserDetail(Integer userID, Long joined, String userName,
+				String profile, Integer image, String email, String web,
+				String twitter, String gcm, String apns, Integer[] observeTag,
 				Boolean observeMention) {
-			super(userID, lastLogin, userName, profile, image);
+			super(userID, joined, userName, profile, image);
+			Email = email;
 			Web = web;
 			Twitter = twitter;
-			GCM = gCM;
-			APNs = aPNs;
+			GCM = gcm;
+			APNs = apns;
 			ObserveTag = observeTag;
 			ObserveMention = observeMention;
+		}
+
+		public String getEmail() {
+			return Email;
 		}
 
 		public String getWeb() {
@@ -198,7 +204,7 @@ public interface Swallow {
 	 */
 	class Message {
 		private Integer PostID;
-		private Integer Posted;
+		private Long Posted;
 		private Integer UserID;
 		private String Message;
 		private Integer FavNum;
@@ -209,7 +215,7 @@ public interface Swallow {
 		private Integer[] Dest;
 		private String[] Enquete;
 
-		public Message(Integer postID, Integer posted, Integer userID,
+		public Message(Integer postID, Long posted, Integer userID,
 				String message, Integer favNum, String[] attribute,
 				Integer[] fileID, Integer[] tagID, Integer[] reply,
 				Integer[] dest, String[] enquete) {
@@ -230,7 +236,7 @@ public interface Swallow {
 			return PostID;
 		}
 
-		public Integer getPosted() {
+		public Long getPosted() {
 			return Posted;
 		}
 
@@ -276,15 +282,14 @@ public interface Swallow {
 	 */
 	class File {
 		private Integer FileID;
-		private Integer Created;
+		private Long Created;
 		private String FileName;
 		private String FileType;
 		private Integer[] TagID;
 		private Integer[] FolderContent;
 
-		public File(Integer fileID, Integer created, String fileName,
+		public File(Integer fileID, Long created, String fileName,
 				String fileType, Integer[] tagID, Integer[] folderContent) {
-			super();
 			FileID = fileID;
 			Created = created;
 			FileName = fileName;
@@ -297,7 +302,7 @@ public interface Swallow {
 			return FileID;
 		}
 
-		public Integer getCreated() {
+		public Long getCreated() {
 			return Created;
 		}
 
@@ -323,13 +328,11 @@ public interface Swallow {
 	 */
 	class Tag {
 		private Integer TagID;
-		private Integer Updated;
+		private Long Updated;
 		private String TagName;
 		private Integer PostNum;
 
-		public Tag(Integer tagID, Integer updated, String tagName,
-				Integer postNum) {
-			super();
+		public Tag(Integer tagID, Long updated, String tagName, Integer postNum) {
 			TagID = tagID;
 			Updated = updated;
 			TagName = tagName;
@@ -340,7 +343,7 @@ public interface Swallow {
 			return TagID;
 		}
 
-		public Integer getUpdated() {
+		public Long getUpdated() {
 			return Updated;
 		}
 
@@ -359,12 +362,11 @@ public interface Swallow {
 	class Favorite {
 		private Integer UserID;
 		private Integer PostID;
-		private Integer Updated;
+		private Long Updated;
 		private Integer FavNum;
 
-		public Favorite(Integer userID, Integer postID, Integer updated,
+		public Favorite(Integer userID, Integer postID, Long updated,
 				Integer favNum) {
-			super();
 			UserID = userID;
 			PostID = postID;
 			Updated = updated;
@@ -379,7 +381,7 @@ public interface Swallow {
 			return PostID;
 		}
 
-		public Integer getUpdated() {
+		public Long getUpdated() {
 			return Updated;
 		}
 
@@ -394,10 +396,10 @@ public interface Swallow {
 	class Answer {
 		private Integer UserID;
 		private Integer PostID;
-		private Integer Updated;
+		private Long Updated;
 		private String Answer;
 
-		public Answer(Integer userID, Integer postID, Integer updated,
+		public Answer(Integer userID, Integer postID, Long updated,
 				String answer) {
 			UserID = userID;
 			PostID = postID;
@@ -413,7 +415,7 @@ public interface Swallow {
 			return PostID;
 		}
 
-		public Integer getUpdated() {
+		public Long getUpdated() {
 			return Updated;
 		}
 
@@ -428,9 +430,9 @@ public interface Swallow {
 	class Received {
 		private Integer UserID;
 		private Integer PostID;
-		private Integer Updated;
+		private Long Updated;
 
-		public Received(Integer userID, Integer postID, Integer updated) {
+		public Received(Integer userID, Integer postID, Long updated) {
 			UserID = userID;
 			PostID = postID;
 			Updated = updated;
@@ -444,7 +446,7 @@ public interface Swallow {
 			return PostID;
 		}
 
-		public Integer getUpdated() {
+		public Long getUpdated() {
 			return Updated;
 		}
 	}
