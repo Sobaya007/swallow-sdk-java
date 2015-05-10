@@ -52,6 +52,12 @@ public interface Swallow {
 	public InputStream getFile(Integer fileID);
 
 	/*
+	 * サムネイルを取得
+	 */
+	public InputStream getThumbnail(Integer fileID, Integer width,
+			Integer height);
+
+	/*
 	 * ファイルを投稿
 	 */
 	public File createFile(String fileName, String fileType, Integer[] tagIDs,

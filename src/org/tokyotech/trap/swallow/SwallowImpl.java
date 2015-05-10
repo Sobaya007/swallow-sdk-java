@@ -6,7 +6,7 @@ import java.util.Date;
 public class SwallowImpl implements Swallow {
 	private String sessionID;
 	private SwallowSecurity security;
-	
+
 	public SwallowImpl(String sessionID, SwallowSecurity security) {
 		this.sessionID = sessionID;
 		this.security = security;
@@ -57,6 +57,13 @@ public class SwallowImpl implements Swallow {
 
 	@Override
 	public InputStream getFile(Integer fileID) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public InputStream getThumbnail(Integer fileID, Integer width,
+			Integer height) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

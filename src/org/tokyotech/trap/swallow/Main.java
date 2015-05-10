@@ -63,6 +63,14 @@ public class Main {
 		System.out.println("\n-----\n");
 		
 		/*
+		 * ファイル取得・サムネイル取得
+		 */
+		System.out.println(swallow.getFile(1));
+		System.out.println(swallow.getThumbnail(2, 32, 32));
+		
+		System.out.println("\n-----\n");
+		
+		/*
 		 * タグ追加と一覧取得
 		 */
 		swallow.createTag("myTag");

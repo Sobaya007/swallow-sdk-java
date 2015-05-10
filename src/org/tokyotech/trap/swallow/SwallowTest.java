@@ -156,6 +156,16 @@ public class SwallowTest implements Swallow {
 		return fileEntity.get(fileID);
 	}
 	@Override
+	public InputStream getThumbnail(Integer fileID, Integer width,
+			Integer height){
+		File f = findFile(null, null, null, null, new Integer[]{ fileID }, null, null, null)[0];
+		if(f.getFileType().startsWith("image/")){
+			return fileEntity.get(fileID);
+		}else{
+			return null;
+		}
+	}
+	@Override
 	public File createFile(String fileName, String fileType,
 			Integer[] tagIDs, Integer[] folderContent,
 			Integer overwriteFileID, InputStream fileData) {
