@@ -46,7 +46,7 @@ public class SwallowSecurity implements Serializable {
 	 */
 	public Swallow getSwallow(){
 		// FIXME: テスト用
-		return new SwallowTest(sessionID, this);
+		return new SwallowTest();
 		// return new SwallowImpl(sessionID, this);
 	}
 
