@@ -1,7 +1,5 @@
 package org.tokyotech.trap.swallow;
 
-import java.io.InputStream;
-
 /*
  * リクエストメソッドの引数や、レスポンスクラスのフィールドはすべてAPIアクションのparametersおよびresultsに対応しています。
  * 下記のページ(APIアクション一覧)を参考にするとわかりやすい……かもしれません。
@@ -49,20 +47,18 @@ public interface Swallow {
 	/*
 	 * ファイルを取得
 	 */
-	public InputStream getFile(Integer fileID);
+	public byte[] getFile(Integer fileID);
 
 	/*
 	 * サムネイルを取得
 	 */
-	public InputStream getThumbnail(Integer fileID, Integer width,
-			Integer height);
+	public byte[] getThumbnail(Integer fileID, Integer width, Integer height);
 
 	/*
 	 * ファイルを投稿
 	 */
 	public File createFile(String fileName, String fileType, Integer[] tagIDs,
-			Integer[] folderContent, Integer overwriteFileID,
-			InputStream fileData);
+			Integer[] folderContent, Integer overwriteFileID, byte[] fileData);
 
 	/*
 	 * タグを探す

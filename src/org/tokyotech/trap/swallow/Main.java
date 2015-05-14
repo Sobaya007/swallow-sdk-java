@@ -55,7 +55,7 @@ public class Main {
 		/*
 		 * ファイル投稿と一覧取得
 		 */
-		swallow.createFile("test.txt", "text/plain", null, null, null, new ByteArrayInputStream("abcde".getBytes()));
+		swallow.createFile("test.txt", "text/plain", null, null, null, "ABCDE12345".getBytes());
 		for(Swallow.File f : swallow.findFile(0, 50, null, null, null, null, null, null)){
 			System.out.println(f.getFileName());
 		}

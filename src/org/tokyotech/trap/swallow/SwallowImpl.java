@@ -1,8 +1,5 @@
 package org.tokyotech.trap.swallow;
 
-import java.io.InputStream;
-import java.util.Date;
-
 public class SwallowImpl implements Swallow {
 	private String sessionID;
 	private SwallowSecurity security;
@@ -56,22 +53,20 @@ public class SwallowImpl implements Swallow {
 	}
 
 	@Override
-	public InputStream getFile(Integer fileID) {
+	public byte[] getFile(Integer fileID) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
-	public InputStream getThumbnail(Integer fileID, Integer width,
-			Integer height) {
+	public byte[] getThumbnail(Integer fileID, Integer width, Integer height) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
 	public File createFile(String fileName, String fileType, Integer[] tagIDs,
-			Integer[] folderContent, Integer overwriteFileID,
-			InputStream fileData) {
+			Integer[] folderContent, Integer overwriteFileID, byte[] fileData) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
