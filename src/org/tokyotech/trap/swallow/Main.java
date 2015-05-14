@@ -77,12 +77,9 @@ public class Main {
 		for(Swallow.Tag t : swallow.findTag(0, 50, null, null, null, null, null, null)){
 			System.out.println(t.getTagName());
 		}
-		
+		/*
 		System.out.println("\n-----\n");
 		
-		/*
-		 * ふぁぼと一覧取得
-		 */
 		swallow.createFavorite(1, 100);
 		for(Swallow.Favorite f : swallow.findFavorite(0, 50, null, null, null, null, null, null)){
 			System.out.println(f.getFavNum());
@@ -90,9 +87,6 @@ public class Main {
 		
 		System.out.println("\n-----\n");
 		
-		/*
-		 * アンケート回答と一覧取得
-		 */
 		swallow.createAnswer(16, "選択肢A");
 		for(Swallow.Answer a : swallow.findAnswer(0, 50, null, null, null, null)){
 			System.out.println(a.getAnswer());
@@ -100,13 +94,11 @@ public class Main {
 		
 		System.out.println("\n-----\n");
 		
-		/*
-		 * 既読追加と一覧取得
-		 */
 		swallow.createReceived(6);
 		for(Swallow.Received r : swallow.findReceived(0, 50, null, null, null, null)){
 			System.out.println(r.getUpdated());
 		}
+		*/
 	}
 
 }

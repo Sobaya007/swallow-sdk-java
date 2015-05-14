@@ -86,35 +86,13 @@ public class SwallowImpl implements Swallow {
 	}
 
 	@Override
-	public Favorite[] findFavorite(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer minFavNum, Integer maxFavNum,
-			Integer[] userIDs, Integer[] postIDs) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
 	public Favorite createFavorite(Integer postID, Integer favNum) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
-	public Answer[] findAnswer(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] userIDs, Integer[] postIDs) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
-	public Answer createAnswer(Integer postID, String answer) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
-	public Received[] findReceived(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] userIDs, Integer[] postIDs) {
+	public Answer createAnswer(Integer postID, Integer answerIndex) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

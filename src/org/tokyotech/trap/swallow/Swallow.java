@@ -73,33 +73,14 @@ public interface Swallow {
 	public Tag createTag(String tagName);
 
 	/*
-	 * Favを探す
-	 */
-	public Favorite[] findFavorite(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer minFavNum, Integer maxFavNum,
-			Integer[] userIDs, Integer[] postIDs);
-
-	/*
 	 * ふぁぼる
 	 */
 	public Favorite createFavorite(Integer postID, Integer favNum);
 
 	/*
-	 * アンケート回答を探す
-	 */
-	public Answer[] findAnswer(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] userIDs, Integer[] postIDs);
-
-	/*
 	 * アンケートに回答する
 	 */
-	public Answer createAnswer(Integer postID, String answer);
-
-	/*
-	 * 既読情報確認
-	 */
-	public Received[] findReceived(Integer startIndex, Integer endIndex,
-			Long fromTime, Long toTime, Integer[] userIDs, Integer[] postIDs);
+	public Answer createAnswer(Integer postID, Integer answerIndex);
 
 	/*
 	 * 既読をつける
@@ -209,29 +190,41 @@ public interface Swallow {
 		private Long Posted;
 		private Integer UserID;
 		private String Message;
-		private Integer FavNum;
 		private String[] Attribute;
 		private Integer[] FileID;
 		private Integer[] TagID;
 		private Integer[] Reply;
 		private Integer[] Dest;
 		private String[] Enquete;
+		private Integer FavCount;
+		private Favorite[] Fav;
+		private Integer AnswerCount;
+		private Answer[] Answer;
+		private Integer ReceivedCount;
+		private Received[] Received;
 
 		public Message(Integer postID, Long posted, Integer userID,
-				String message, Integer favNum, String[] attribute,
-				Integer[] fileID, Integer[] tagID, Integer[] reply,
-				Integer[] dest, String[] enquete) {
+				String message, String[] attribute, Integer[] fileID,
+				Integer[] tagID, Integer[] reply, Integer[] dest,
+				String[] enquete, Integer favCount, Favorite[] fav,
+				Integer answerCount, Answer[] answer, Integer receivedCount,
+				Received[] received) {
 			PostID = postID;
 			Posted = posted;
 			UserID = userID;
 			Message = message;
-			FavNum = favNum;
 			Attribute = attribute;
 			FileID = fileID;
 			TagID = tagID;
 			Reply = reply;
 			Dest = dest;
 			Enquete = enquete;
+			FavCount = favCount;
+			Fav = fav;
+			AnswerCount = answerCount;
+			Answer = answer;
+			ReceivedCount = receivedCount;
+			Received = received;
 		}
 
 		public Integer getPostID() {
@@ -248,10 +241,6 @@ public interface Swallow {
 
 		public String getMessage() {
 			return Message;
-		}
-
-		public Integer getFavNum() {
-			return FavNum;
 		}
 
 		public String[] getAttribute() {
@@ -276,6 +265,30 @@ public interface Swallow {
 
 		public String[] getEnquete() {
 			return Enquete;
+		}
+
+		public Integer getFavCount() {
+			return FavCount;
+		}
+
+		public Favorite[] getFav() {
+			return Fav;
+		}
+
+		public Integer getAnswerCount() {
+			return AnswerCount;
+		}
+
+		public Answer[] getAnswer() {
+			return Answer;
+		}
+
+		public Integer getReceivedCount() {
+			return ReceivedCount;
+		}
+
+		public Received[] getReceived() {
+			return Received;
 		}
 	}
 
@@ -399,10 +412,10 @@ public interface Swallow {
 		private Integer UserID;
 		private Integer PostID;
 		private Long Updated;
-		private String Answer;
+		private Integer Answer;
 
 		public Answer(Integer userID, Integer postID, Long updated,
-				String answer) {
+				Integer answer) {
 			UserID = userID;
 			PostID = postID;
 			Updated = updated;
@@ -421,7 +434,7 @@ public interface Swallow {
 			return Updated;
 		}
 
-		public String getAnswer() {
+		public Integer getAnswer() {
 			return Answer;
 		}
 	}
