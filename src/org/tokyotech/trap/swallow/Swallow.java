@@ -11,81 +11,88 @@ public interface Swallow {
 	 */
 	public User[] findUser(Integer startIndex, Integer endIndex, Long fromTime,
 			Long toTime, Integer[] userIDs, String userNamePattern,
-			String profilePattern, Boolean hasImage);
+			String profilePattern, Boolean hasImage) throws SwallowException;
 
 	/*
 	 * ユーザ情報を編集
 	 */
-	public User modifyUser(String userName, String profile,
+	public UserDetail modifyUser(String userName, String profile,
 			Integer imageFileID, String password, String email, String web,
 			String twitter, String gcm, String apns, Integer[] observeTagIDs,
-			Boolean observeMention);
+			Boolean observeMention) throws SwallowException;
 
 	/*
 	 * 投稿を取得
 	 */
-	public Message[] findMessage(Integer startIndex, Integer endIndex,
+	public FullMessage[] findMessage(Integer startIndex, Integer endIndex,
 			Long fromTime, Long toTime, Integer[] postIDs,
 			Integer[] postedUserIDs, Integer[] tagIDs, Integer[] replyPostIDs,
 			Integer[] destUserIDs, String messagePattern,
-			Boolean hasAttachment, Boolean isEnquete, Boolean convertToKana);
+			Boolean hasAttachment, Boolean isEnquete, Boolean convertToKana)
+			throws SwallowException;
 
 	/*
 	 * 投稿する
 	 */
-	public Message createMessage(String message, String[] attributes,
-			Integer[] fileIDs, Integer[] replyPostIDs, Integer[] tagIDs,
-			Integer[] destUserIDs, String[] enquetes, Integer overwritePostID);
+	public Message createMessage(String message, Integer[] fileIDs,
+			Integer[] tagIDs, Integer[] replyPostIDs, Integer[] destUserIDs,
+			String[] enquetes, Integer overwritePostID) throws SwallowException;
 
 	/*
 	 * ファイルを探す
 	 */
 	public File[] findFile(Integer startIndex, Integer endIndex, Long fromTime,
 			Long toTime, Integer[] fileIDs, Integer[] tagIDs,
-			String fileNamePattern, String fileTypePattern);
+			String fileNamePattern, String fileTypePattern)
+			throws SwallowException;
 
 	/*
 	 * ファイルを取得
 	 */
-	public byte[] getFile(Integer fileID);
+	public byte[] getFile(Integer fileID) throws SwallowException;
 
 	/*
 	 * サムネイルを取得
 	 */
-	public byte[] getThumbnail(Integer fileID, Integer width, Integer height);
+	public byte[] getThumbnail(Integer fileID, Integer width, Integer height)
+			throws SwallowException;
 
 	/*
 	 * ファイルを投稿
 	 */
 	public File createFile(String fileName, String fileType, Integer[] tagIDs,
-			Integer[] folderContent, Integer overwriteFileID, byte[] fileData);
+			Integer[] folderContent, Integer overwriteFileID, byte[] fileData)
+			throws SwallowException;
 
 	/*
 	 * タグを探す
 	 */
 	public Tag[] findTag(Integer startIndex, Integer endIndex, Long fromTime,
-			Long toTime, Integer[] tagIDs, Integer minPostNum,
-			Integer maxPostNum, String tagNamePattern);
+			Long toTime, Integer[] tagIDs, String tagNamePattern,
+			Boolean isInvisible) throws SwallowException;
 
 	/*
 	 * タグを作成
 	 */
-	public Tag createTag(String tagName);
+	public Tag createTag(String tagName, Boolean invisible)
+			throws SwallowException;
 
 	/*
 	 * ふぁぼる
 	 */
-	public Favorite createFavorite(Integer postID, Integer favNum);
+	public Favorite createFavorite(Integer postID, Integer favNum)
+			throws SwallowException;
 
 	/*
 	 * アンケートに回答する
 	 */
-	public Answer createAnswer(Integer postID, Integer answerIndex);
+	public Answer createAnswer(Integer postID, Integer answerIndex)
+			throws SwallowException;
 
 	/*
 	 * 既読をつける
 	 */
-	public Received createReceived(Integer postID);
+	public Received createReceived(Integer postID) throws SwallowException;
 
 	/*
 	 * レスポンス: ユーザ情報
@@ -190,41 +197,24 @@ public interface Swallow {
 		private Long Posted;
 		private Integer UserID;
 		private String Message;
-		private String[] Attribute;
 		private Integer[] FileID;
 		private Integer[] TagID;
 		private Integer[] Reply;
 		private Integer[] Dest;
 		private String[] Enquete;
-		private Integer FavCount;
-		private Favorite[] Fav;
-		private Integer AnswerCount;
-		private Answer[] Answer;
-		private Integer ReceivedCount;
-		private Received[] Received;
 
 		public Message(Integer postID, Long posted, Integer userID,
-				String message, String[] attribute, Integer[] fileID,
-				Integer[] tagID, Integer[] reply, Integer[] dest,
-				String[] enquete, Integer favCount, Favorite[] fav,
-				Integer answerCount, Answer[] answer, Integer receivedCount,
-				Received[] received) {
+				String message, Integer[] fileID, Integer[] tagID,
+				Integer[] reply, Integer[] dest, String[] enquete) {
 			PostID = postID;
 			Posted = posted;
 			UserID = userID;
 			Message = message;
-			Attribute = attribute;
 			FileID = fileID;
 			TagID = tagID;
 			Reply = reply;
 			Dest = dest;
 			Enquete = enquete;
-			FavCount = favCount;
-			Fav = fav;
-			AnswerCount = answerCount;
-			Answer = answer;
-			ReceivedCount = receivedCount;
-			Received = received;
 		}
 
 		public Integer getPostID() {
@@ -241,10 +231,6 @@ public interface Swallow {
 
 		public String getMessage() {
 			return Message;
-		}
-
-		public String[] getAttribute() {
-			return Attribute;
 		}
 
 		public Integer[] getFileID() {
@@ -265,6 +251,32 @@ public interface Swallow {
 
 		public String[] getEnquete() {
 			return Enquete;
+		}
+	}
+
+	class FullMessage extends Message {
+		private Integer FavCount;
+		private Favorite[] Fav;
+		private Integer AnswerCount;
+		private Answer[] Answer;
+		private Integer ReceivedCount;
+		private Received[] Received;
+
+		public FullMessage(Integer postID, Long posted, Integer userID,
+				String message, Integer[] fileID, Integer[] tagID,
+				Integer[] reply, Integer[] dest, String[] enquete,
+				Integer favCount, Favorite[] fav, Integer answerCount,
+				org.tokyotech.trap.swallow.Swallow.Answer[] answer,
+				Integer receivedCount,
+				org.tokyotech.trap.swallow.Swallow.Received[] received) {
+			super(postID, posted, userID, message, fileID, tagID, reply, dest,
+					enquete);
+			FavCount = favCount;
+			Fav = fav;
+			AnswerCount = answerCount;
+			Answer = answer;
+			ReceivedCount = receivedCount;
+			Received = received;
 		}
 
 		public Integer getFavCount() {
@@ -345,13 +357,14 @@ public interface Swallow {
 		private Integer TagID;
 		private Long Updated;
 		private String TagName;
-		private Integer PostNum;
+		private Boolean Invisible;
 
-		public Tag(Integer tagID, Long updated, String tagName, Integer postNum) {
+		public Tag(Integer tagID, Long updated, String tagName,
+				Boolean invisible) {
 			TagID = tagID;
 			Updated = updated;
 			TagName = tagName;
-			PostNum = postNum;
+			Invisible = invisible;
 		}
 
 		public Integer getTagID() {
@@ -366,8 +379,8 @@ public interface Swallow {
 			return TagName;
 		}
 
-		public Integer getPostNum() {
-			return PostNum;
+		public Boolean getInvisible() {
+			return Invisible;
 		}
 	}
 
