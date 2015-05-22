@@ -104,15 +104,6 @@ public interface Swallow {
 		private String Profile;
 		private Integer Image;
 
-		public User(Integer userID, Long joined, String userName,
-				String profile, Integer image) {
-			UserID = userID;
-			Joined = joined;
-			UserName = userName;
-			Profile = profile;
-			Image = image;
-		}
-
 		public Integer getUserID() {
 			return UserID;
 		}
@@ -145,20 +136,6 @@ public interface Swallow {
 		private String APNs;
 		private Integer[] ObserveTag;
 		private Boolean ObserveMention;
-
-		public UserDetail(Integer userID, Long joined, String userName,
-				String profile, Integer image, String email, String web,
-				String twitter, String gcm, String apns, Integer[] observeTag,
-				Boolean observeMention) {
-			super(userID, joined, userName, profile, image);
-			Email = email;
-			Web = web;
-			Twitter = twitter;
-			GCM = gcm;
-			APNs = apns;
-			ObserveTag = observeTag;
-			ObserveMention = observeMention;
-		}
 
 		public String getEmail() {
 			return Email;
@@ -202,20 +179,6 @@ public interface Swallow {
 		private Integer[] Reply;
 		private Integer[] Dest;
 		private String[] Enquete;
-
-		public Message(Integer postID, Long posted, Integer userID,
-				String message, Integer[] fileID, Integer[] tagID,
-				Integer[] reply, Integer[] dest, String[] enquete) {
-			PostID = postID;
-			Posted = posted;
-			UserID = userID;
-			Message = message;
-			FileID = fileID;
-			TagID = tagID;
-			Reply = reply;
-			Dest = dest;
-			Enquete = enquete;
-		}
 
 		public Integer getPostID() {
 			return PostID;
@@ -262,23 +225,6 @@ public interface Swallow {
 		private Integer ReceivedCount;
 		private Received[] Received;
 
-		public FullMessage(Integer postID, Long posted, Integer userID,
-				String message, Integer[] fileID, Integer[] tagID,
-				Integer[] reply, Integer[] dest, String[] enquete,
-				Integer favCount, Favorite[] fav, Integer answerCount,
-				org.tokyotech.trap.swallow.Swallow.Answer[] answer,
-				Integer receivedCount,
-				org.tokyotech.trap.swallow.Swallow.Received[] received) {
-			super(postID, posted, userID, message, fileID, tagID, reply, dest,
-					enquete);
-			FavCount = favCount;
-			Fav = fav;
-			AnswerCount = answerCount;
-			Answer = answer;
-			ReceivedCount = receivedCount;
-			Received = received;
-		}
-
 		public Integer getFavCount() {
 			return FavCount;
 		}
@@ -315,16 +261,6 @@ public interface Swallow {
 		private Integer[] TagID;
 		private Integer[] FolderContent;
 
-		public File(Integer fileID, Long created, String fileName,
-				String fileType, Integer[] tagID, Integer[] folderContent) {
-			FileID = fileID;
-			Created = created;
-			FileName = fileName;
-			FileType = fileType;
-			TagID = tagID;
-			FolderContent = folderContent;
-		}
-
 		public Integer getFileID() {
 			return FileID;
 		}
@@ -359,14 +295,6 @@ public interface Swallow {
 		private String TagName;
 		private Boolean Invisible;
 
-		public Tag(Integer tagID, Long updated, String tagName,
-				Boolean invisible) {
-			TagID = tagID;
-			Updated = updated;
-			TagName = tagName;
-			Invisible = invisible;
-		}
-
 		public Integer getTagID() {
 			return TagID;
 		}
@@ -392,14 +320,6 @@ public interface Swallow {
 		private Integer PostID;
 		private Long Updated;
 		private Integer FavNum;
-
-		public Favorite(Integer userID, Integer postID, Long updated,
-				Integer favNum) {
-			UserID = userID;
-			PostID = postID;
-			Updated = updated;
-			FavNum = favNum;
-		}
 
 		public Integer getUserID() {
 			return UserID;
@@ -427,14 +347,6 @@ public interface Swallow {
 		private Long Updated;
 		private Integer Answer;
 
-		public Answer(Integer userID, Integer postID, Long updated,
-				Integer answer) {
-			UserID = userID;
-			PostID = postID;
-			Updated = updated;
-			Answer = answer;
-		}
-
 		public Integer getUserID() {
 			return UserID;
 		}
@@ -459,12 +371,6 @@ public interface Swallow {
 		private Integer UserID;
 		private Integer PostID;
 		private Long Updated;
-
-		public Received(Integer userID, Integer postID, Long updated) {
-			UserID = userID;
-			PostID = postID;
-			Updated = updated;
-		}
 
 		public Integer getUserID() {
 			return UserID;
